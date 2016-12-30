@@ -1,5 +1,6 @@
 FROM docker.elastic.co/kibana/kibana-ubuntu-base:latest
 MAINTAINER Elastic Docker Team <docker@elastic.co>
+ARG ELASTIC_VERSION
 ARG KIBANA_DOWNLOAD_URL
 ARG X_PACK_URL
 EXPOSE 5601
@@ -20,6 +21,7 @@ ADD ssl/kibana.example.org.* /usr/share/kibana/config/
 
 RUN usermod --home /usr/share/kibana kibana
 USER kibana
-RUN bin/kibana-plugin install ${X_PACK_URL}
+# commented out for development
+# RUN bin/kibana-plugin install ${X_PACK_URL}
 ENV PATH=/usr/share/kibana/bin:$PATH
 CMD /usr/local/bin/kibana-docker
